@@ -69,7 +69,7 @@ func checkForError(resp *resty.Response, err error) error {
 		if len(e.ErrorMessage) > 0 {
 			msg = fmt.Sprintf("%s: %s", resp.Status(), e.ErrorMessage)
 		} else {
-			msg = resp.Status()
+			msg = fmt.Sprintf("Status: %v. Body: %v", resp.Status(), string(resp.Body()))
 		}
 		if resp.StatusCode() == 409 {
 			return &ObjectAlreadyExists{ErrorMessage: msg}
